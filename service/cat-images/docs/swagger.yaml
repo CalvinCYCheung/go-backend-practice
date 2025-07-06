@@ -1,0 +1,43 @@
+basePath: /api/v1
+definitions:
+  internal.CatImage:
+    properties:
+      height:
+        type: integer
+      id:
+        type: string
+      url:
+        type: string
+      width:
+        type: integer
+    type: object
+  internal.Response-internal_CatImage:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/internal.CatImage'
+        type: array
+      message:
+        type: string
+      result:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /cat-images:
+    get:
+      consumes:
+      - application/json
+      description: get cat images
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: description
+          schema:
+            $ref: '#/definitions/internal.Response-internal_CatImage'
+      summary: get cat images
+      tags:
+      - cat-images
+swagger: "2.0"

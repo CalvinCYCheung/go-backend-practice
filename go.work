@@ -1,0 +1,8 @@
+go 1.23.1
+
+use (
+	./service/authentication
+	./service/cat-images
+	./service/common-lib
+	./service/jwk-key-rotation
+)

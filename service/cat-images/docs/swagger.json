@@ -1,0 +1,68 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/cat-images": {
+            "get": {
+                "description": "get cat images",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "cat-images"
+                ],
+                "summary": "get cat images",
+                "responses": {
+                    "200": {
+                        "description": "description",
+                        "schema": {
+                            "$ref": "#/definitions/internal.Response-internal_CatImage"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "internal.CatImage": {
+            "type": "object",
+            "properties": {
+                "height": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                }
+            }
+        },
+        "internal.Response-internal_CatImage": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal.CatImage"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
