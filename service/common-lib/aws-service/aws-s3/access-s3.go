@@ -17,7 +17,7 @@ type S3Access interface {
 	PutObject(ctx context.Context, s3Object model.S3Object) error
 	DeleteObject(ctx context.Context, s3Object model.S3Object) error
 	GetObject(ctx context.Context, s3Object model.S3Object) (*s3.GetObjectOutput, error)
-	ListObjects(ctx context.Context, prefix string) (*s3.ListObjectsV2Output, error)
+	ListObjects(ctx context.Context, prefix string, bucketName string) (*s3.ListObjectsV2Output, error)
 }
 
 type S3AccessImpl struct {
@@ -25,7 +25,7 @@ type S3AccessImpl struct {
 	IsMock bool
 }
 
-func (s S3AccessImpl) PutObject(ctx context.Context, s3Object model.S3Object) error {
+func (s *S3AccessImpl) PutObject(ctx context.Context, s3Object model.S3Object) error {
 	if s.IsMock {
 		return &errorsmodel.ErrorModel[string]{
 			Err:  errors.New("error test"),
@@ -48,7 +48,7 @@ func (s S3AccessImpl) PutObject(ctx context.Context, s3Object model.S3Object) er
 	return nil
 }
 
-func (s S3AccessImpl) DeleteObject(ctx context.Context, s3Object model.S3Object) error {
+func (s *S3AccessImpl) DeleteObject(ctx context.Context, s3Object model.S3Object) error {
 	if s.IsMock {
 		return errors.New("test errors")
 	}
@@ -60,7 +60,7 @@ func (s S3AccessImpl) DeleteObject(ctx context.Context, s3Object model.S3Object)
 	return err
 }
 
-func (s S3AccessImpl) GetObject(ctx context.Context, s3Object model.S3Object) (*s3.GetObjectOutput, error) {
+func (s *S3AccessImpl) GetObject(ctx context.Context, s3Object model.S3Object) (*s3.GetObjectOutput, error) {
 	if s.IsMock {
 		return nil, errors.New("test errors")
 	}
@@ -74,7 +74,7 @@ func (s S3AccessImpl) GetObject(ctx context.Context, s3Object model.S3Object) (*
 	}
 	return object, nil
 }
-func (s S3AccessImpl) ListObjects(ctx context.Context, prefix string, bucketName string) (*s3.ListObjectsV2Output, error) {
+func (s *S3AccessImpl) ListObjects(ctx context.Context, prefix string, bucketName string) (*s3.ListObjectsV2Output, error) {
 	if s.IsMock {
 		return nil, errors.New("test errors")
 	}
